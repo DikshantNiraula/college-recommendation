@@ -19,8 +19,8 @@
     <select class="form-control select" name="radius">
     <option value="" disabled>Select Radius</option>
     <option value="5">5 KM radius</option>
-    <option value="5">10 KM radius</option>
-    <option value="5">25 KM radius</option>
+    <option value="10">10 KM radius</option>
+    <option value="25">25 KM radius</option>
     <option value="10000">All Over Nepal KM radius</option>
     </select>
     </span>
