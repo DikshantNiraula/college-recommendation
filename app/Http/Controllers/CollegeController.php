@@ -51,17 +51,18 @@ class CollegeController extends Controller
     public function update(Request $request, College $college)
     {
         $college->fill($request->all());
+        $college->save();
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
-            $request['image'] = $imageName;
+
+            $college->fill(['image' => $imageName]);
+            $college->save();
         }
 
-        $college->fill($request->all());
-
-        
-        $college->save();
+    
         return redirect()->route('colleges.index')
             ->with('success', 'College updated successfully.');
 
