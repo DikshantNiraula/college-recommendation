@@ -13,6 +13,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Services\NearestCollegeService;
+use App\Services\TravellingCollegeService;
 use Illuminate\Http\Request;
 
 class UiController extends Controller
@@ -53,6 +54,18 @@ class UiController extends Controller
         return view('ui.colleges', compact( 'colleges','courses')); 
     }
 
+    public function collegeDetail($id)
+    {
+        $college = College::where('id',$id)->first();
+        return view('ui.college', compact( 'college')); 
+    }
+
+    public function courses()
+    {
+        $colleges = College::latest()->get();
+        $courses = CollegeCourse::latest()->limit(10)->get();
+        return view('ui.courses', compact( 'courses','colleges')); 
+    }
 
     public function blogs()
     {
@@ -105,12 +118,38 @@ class UiController extends Controller
     public function getNearestColleges(Request $request)
     {
          // Retrieve the location from the request
-    $locationData = $request->all();
+        $locationData = $request->all();
 
-    // Call the college service to get the nearest colleges
-    $colleges = (new NearestCollegeService)->getNearestColleges($locationData);
+        // Call the college service to get the nearest colleges
+        $colleges = (new NearestCollegeService)->getNearestColleges($locationData);
 
-    // Return the response
-return view('ui.append-nearest-college',compact('colleges'))->render();
-}
+        // Return the response
+        return view('ui.append-nearest-college',compact('colleges'))->render();
+    }
+
+    public function travelCollege()
+    {
+        $colleges = College::latest()->get();
+        $courses = CollegeCourse::orderBy('title','asc')->limit(10)->get();
+        return view('ui.travel-college', compact('colleges','courses'));
+    }
+
+    public function getPaths(Request $request)
+    {
+        $collegeIds = $request->input('collegeIds');
+        $result = (new TravellingCollegeService())->findBestRoute($collegeIds, $request->latitude, $request->longitude);
+        
+        
+
+        return $result;
+        // return view('ui.append-travel-college',[
+        //     'bestPath' => $bestPath,
+        //     'worstPath' => $worstPath,
+        //     'colleges' => $colleges
+        //     // 'worstColleges' => $result['worstColleges'],
+        //     // 'worstDistance' => $result['worstDistance']
+        // ])->render();
+
+
+    }
 }

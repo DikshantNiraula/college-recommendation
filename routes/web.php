@@ -48,6 +48,13 @@ Route::get('/colleges', [UiController::class, 'colleges'])->name('colleges');
 Route::get('/college/{slug}', [UiController::class, 'collegeDetail'])->name('college');
 
 Route::get('/nearest-college',[UiController::class,'getNearestColleges']);
+Route::get('/travel-colleges',[UiController::class,'travelCollege']);
+
+Route::get('/shortest-path',[UiController::class,'getPaths']);
+
+
+Route::get('/courses', [UiController::class, 'courses'])->name('courses');
+Route::get('/course/{slug}', [UiController::class, 'courseDetail'])->name('course');
 
 
 //Admin Routes

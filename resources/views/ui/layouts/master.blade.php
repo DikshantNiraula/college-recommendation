@@ -64,6 +64,9 @@
                       <a href="{{url('/colleges')}}">Colleges </a>
                    </li>
                    <li class="has-submenu menu-effect">
+                    <a href="{{url('/travel-colleges')}}">Travel Colleges </a>
+                 </li>
+                   <li class="has-submenu menu-effect">
                       <a href="{{url('/courses')}}">Courses</i></a>
                    </li>
                    <li class="login-link">

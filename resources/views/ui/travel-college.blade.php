@@ -1,5 +1,14 @@
+
 @extends('ui.layouts.master')
 @section('content')
+
+<!-- CSS file -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- JS files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
 <div class="page-content" style="margin-top: 100px;">
    <div class="container">
@@ -7,74 +16,67 @@
          <div class="col-lg-9">
             <div class="showing-list">
                <div class="row">
+                 
                   <div class="col-lg-6">
-                     <div class="d-flex align-items-center">
-                        <div class="view-icons">
-                           <a href="instructor-grid.html.htm" class="grid-view "><i class="feather-grid"></i></a>
-                           <a href="instructor-list.html.htm" class="list-view active"><i class="feather-list"></i></a>
-                        </div>
-                        <div class="show-result">
-                           <h4>Showing 1-{{$courses->count()}} of {{$courses->count()}} results</h4>
-                        </div>
+                     <div class="show-filter add-course-info">
+                        <form action="#">
+                           <div class="row gx-2 align-items-center">
+                              {{-- <div class="col-md-6 col-item">
+                                 <div class=" search-group">
+                                    <i class="feather-search"></i>
+                                    <input type="text" class="form-control collegeName" placeholder="Search our courses">
+                                 </div>
+                              </div> --}}
+                              <div class="col-md-6 col-lg-6 col-item">
+                                 <div class="form-group select-form mb-0">
+                                    <select id="collegeSelect" class="radius" multiple>
+                                        <option disabled>Select at least 3 Colleges </option>
+                                       @foreach ($colleges as $college)
+                                        <option value="{{$college->id}}">{{$college->college_name}}</option>
+                                       @endforeach
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
                      </div>
                   </div>
-                
                </div>
             </div>
             <div class="row">
 
-                @foreach ($courses as $course)
-                <div class="col-lg-12 d-flex">
-                   <div class="instructor-list flex-fill">
-                      <div class="instructor-img">
-                         <a href="instructor-profile.html.htm">
-                         <img class="img-fluid" alt="" src="{{asset('uploads/'.$course->image)}}">
-                         </a>
-                      </div>
-                      <div class="instructor-content">
-                         <h5><a href="instructor-profile.html.htm">{{$course->title}}</a></h5>
-                         {{-- <h6>Co-ordinates: {{$course->longitude}}, {{$course->latitude}} [Distance: {{$course->distance}} KM]</h6> --}}
-                         <div class="instructor-info">
-                            <div class="rating-img d-flex align-items-center">
-                               <img src="{{asset('uiassets/img/icon/icon-01.svg')}}" class="me-1" alt="">
-                               <p>{{$course->college->college_name}}</p>
-                            </div>
-                            <div class="course-view d-flex align-items-center ms-0">
-                               <img src="{{asset('uiassets/img/icon/icon-02.svg')}}" class="me-1" alt="">
-                               <p>{{$course->course_time_year}} years</p>
-                            </div>
-                            <div class="rating-img d-flex align-items-center">
-                               <img src="{{asset('uiassets/img/icon/user-icon.svg')}}" class="me-1" alt="">
-                               <p>{{ $course->seats_available }} Seats</p>
-                             </div>
-                            {{-- <div class="rating">
-                               <i class="fas fa-star filled"></i>
-                               <i class="fas fa-star filled"></i>
-                               <i class="fas fa-star filled"></i>
-                               <i class="fas fa-star filled"></i>
-                               <i class="fas fa-star"></i>
-                               <span class="d-inline-block average-rating"><span>4.0</span> (15)</span>
-                            </div> --}}
-                            <a href="#rate" class="rating-count"><i class="fa-regular fa-heart"></i></a>
-                         </div>
-                         {{-- <div class="instructor-badge">
-                             @if($course->courses->first() != null)
-                                 <span class="web-badge">{{ $course->title }}</span>
-                             @else
-                              <span class="web-badge"><i class="fas fa-cancel"></i>&nbsp;No Course Available</span>
-                             @endif
-                             @if($course->courses->skip(1)->first() != null)
-                                 <span class="web-badge">{{ optional($course->courses->skip(1)->first())->title }}</span>
-                             @endif
- 
-                         </div> --}}
-                      </div>
-                   </div>
-                </div>
-             @endforeach
+            <div class="colleges">
+
+            </div>
      
             </div>
-   
+            <div class="row">
+               <div class="col-md-12">
+                  <ul class="pagination lms-page lms-pagination">
+                     <li class="page-item prev">
+                        <a class="page-link" href="javascript:void(0);" tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                     </li>
+                     <li class="page-item first-page active">
+                        <a class="page-link" href="javascript:void(0);">1</a>
+                     </li>
+                     <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);">2</a>
+                     </li>
+                     <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);">3</a>
+                     </li>
+                     <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);">4</a>
+                     </li>
+                     <li class="page-item">
+                        <a class="page-link" href="javascript:void(0);">5</a>
+                     </li>
+                     <li class="page-item next">
+                        <a class="page-link" href="javascript:void(0);"><i class="fas fa-angle-right"></i></a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
          </div>
          <div class="col-lg-3">
             <div class="filter-clear">
@@ -92,11 +94,11 @@
                            <i class="fas fa-angle-down"></i>
                         </div>
 
-                    @foreach ($colleges as $college)
+                    @foreach ($courses as $course)
                         <div>
                            <label class="custom_check">
                            <input type="checkbox" name="select_specialist">
-                           <span class="checkmark"></span> {{$college->college_name}}
+                           <span class="checkmark"></span> {{$course->title}}
                            </label>
                         </div>
                     @endforeach
@@ -178,5 +180,44 @@
       </div>
    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#collegeSelect').change(function() {
+            var selectedColleges = $(this).val();
+            var locationData = JSON.parse(localStorage.getItem('location'));
+
+            if (selectedColleges && selectedColleges.length >= 3) {
+            // Call the API to retrieve the shortest path
+            $.ajax({
+                url: '/shortest-path',
+                method: 'GET',
+                data: {
+                latitude: locationData[0], 
+                longitude: locationData[1],
+                collegeIds: selectedColleges
+                },
+                success: function(response) {
+                // Process the response and display the shortest path
+                    appendToView(response)
+                },
+                error: function(xhr, status, error) {
+                console.error('Error:', error);
+                }
+            });
+            }
+        });
+        });
+
+        function appendToView(html)
+        {
+            $('.colleges').empty();
+            $('.colleges').html(html);
+        }
+</script>
+
 
 @endsection
+

@@ -2,12 +2,12 @@
                <div class="col-lg-12 d-flex">
                   <div class="instructor-list flex-fill">
                      <div class="instructor-img">
-                        <a href="instructor-profile.html.htm">
+                        <a href="{{url('college/'.$college->id)}}">
                         <img class="img-fluid" alt="" src="{{asset('uploads/'.$college->image)}}">
                         </a>
                      </div>
                      <div class="instructor-content">
-                        <h5><a href="instructor-profile.html.htm">{{$college->college_name}}</a></h5>
+                        <h5><a href="{{url('college/'.$college->id)}}">{{$college->college_name}}</a></h5>
                         <h6>Co-ordinates: {{$college->longitude}}, {{$college->latitude}} [Distance: {{$college->distance}} KM]</h6>
                         <div class="instructor-info">
                            <div class="rating-img d-flex align-items-center">
