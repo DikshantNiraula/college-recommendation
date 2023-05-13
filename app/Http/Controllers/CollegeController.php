@@ -55,8 +55,11 @@ class CollegeController extends Controller
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads'), $imageName);
-            $college->image = $imageName;
+            $request['image'] = $imageName;
         }
+
+        $college->fill($request->all());
+
         
         $college->save();
         return redirect()->route('colleges.index')
