@@ -12,17 +12,19 @@
     <h1>Engaging & Accessible College/Courses For All</h1>
     </div>
     <div class="banner-content">
-    <form class="form" name="store" id="store" method="post" action="course-list.html">
+    <form class="form" name="store" id="store" method="get" action="colleges">
     <div class="form-inner">
     <div class="input-group">
     <span class="drop-detail">
-    <select class="form-control select" name="storeID">
-    <option value="0">Select Category</option>
-    <option value="1">Category One</option>
-    <option value="1">Category Two</option>
+    <select class="form-control select" name="radius">
+    <option value="" disabled>Select Radius</option>
+    <option value="5">5 KM radius</option>
+    <option value="5">10 KM radius</option>
+    <option value="5">25 KM radius</option>
+    <option value="10000">All Over Nepal KM radius</option>
     </select>
     </span>
-    <input type="email" class="form-control" placeholder="Search School, Online eductional centers, etc">
+    <input type="text" name="college_name" class="form-control" placeholder="Search College Name">
     <button class="btn btn-primary sub-btn" type="submit">Search</button>
     </div>
     </div>

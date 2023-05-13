@@ -25,17 +25,17 @@
                               <div class="col-md-6 col-item">
                                  <div class=" search-group">
                                     <i class="feather-search"></i>
-                                    <input type="text" class="form-control collegeName" placeholder="Search our courses">
+                                    <input type="text" class="form-control collegeName" value="{{request()->college_name  ?? ""}}" placeholder="Search our courses">
                                  </div>
                               </div>
                               <div class="col-md-6 col-lg-6 col-item">
                                  <div class="form-group select-form mb-0">
                                     <select class="form-select radius" name="radius">
                                        <option disabled>College in radius of </option>
-                                       <option value="5">5 KM radius</option>
-                                       <option value="10" selected>10 KM radius</option>
-                                       <option value="25">25 KM Radius</option>
-                                       <option value="10000">All Over Nepal</option>
+                                       <option {{request()->has('radius') && request()->radius == 5 ? 'selected' : ''}} value="5">5 KM radius</option>
+                                       <option {{request()->has('radius') && request()->radius == 10 ? 'selected' : ''}} value="10">10 KM radius</option>
+                                       <option {{request()->has('radius') && request()->radius == 25 ? 'selected' : ''}} value="25">25 KM Radius</option>
+                                       <option {{request()->has('radius') && request()->radius == 10000 ? 'selected' : ''}} value="10000">All Over Nepal</option>
                                     </select>
                                  </div>
                               </div>
