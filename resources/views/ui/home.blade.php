@@ -21,7 +21,7 @@
     <option value="5">5 KM radius</option>
     <option value="10">10 KM radius</option>
     <option value="25">25 KM radius</option>
-    <option value="10000">All Over Nepal KM radius</option>
+    <option value="10000">All Over Nepal KM</option>
     </select>
     </span>
     <input type="text" name="college_name" class="form-control" placeholder="Search College Name">
