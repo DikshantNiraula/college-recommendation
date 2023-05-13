@@ -8,7 +8,7 @@
                      </div>
                      <div class="instructor-content">
                         <h5><a href="instructor-profile.html.htm">{{$college->college_name}}</a></h5>
-                        <h6>Co-ordinates: {{$college->longitude}}, {{$college->latitude}}</h6>
+                        <h6>Co-ordinates: {{$college->longitude}}, {{$college->latitude}} [Distance: {{$college->distance}} KM]</h6>
                         <div class="instructor-info">
                            <div class="rating-img d-flex align-items-center">
                               <img src="{{asset('uiassets/img/icon/icon-01.svg')}}" class="me-1" alt="">

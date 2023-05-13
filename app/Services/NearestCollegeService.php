@@ -27,7 +27,7 @@ class NearestCollegeService
                 $collegeLatitude,
                 $collegeLongitude
             );
-
+            $distance = round($distance/1000, 3);
             $college->distance = $distance;
             $collegesWithDistances[] = $college;
         }
