@@ -6,13 +6,20 @@ use App\Models\College;
 
 class NearestCollegeService
 {
-    public function getNearestColleges($locationData)
+    public function getNearestColleges($filter)
     {
         // Parse the location data
-        $location = $locationData;
+        $location = $filter;
 
         // Retrieve colleges from the database
-        $colleges = College::all();
+        $query = College::query();
+
+        if(isset($filter['name']) && $filter['name'] != '')
+        {
+            $query->where('college_name','LIKE','%'.$filter['name'].'%');
+        }
+
+        $colleges = $query->get();
 
         // Calculate the distances for all colleges
         $collegesWithDistances = [];
@@ -29,7 +36,11 @@ class NearestCollegeService
             );
             $distance = round($distance, 3);
             $college->distance = $distance;
-            $collegesWithDistances[] = $college;
+
+            if($distance <= $filter['radius'])
+            {
+                $collegesWithDistances[] = $college;
+            }
         }
 
         // Sort the colleges by distance in ascending order

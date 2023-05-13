@@ -25,17 +25,17 @@
                               <div class="col-md-6 col-item">
                                  <div class=" search-group">
                                     <i class="feather-search"></i>
-                                    <input type="text" class="form-control" placeholder="Search our courses">
+                                    <input type="text" class="form-control collegeName" placeholder="Search our courses">
                                  </div>
                               </div>
                               <div class="col-md-6 col-lg-6 col-item">
                                  <div class="form-group select-form mb-0">
-                                    <select class="form-select select" name="sellist1">
-                                       <option>Location </option>
-                                       <option selected>Kathmandu</option>
-                                       <option>Bhaktapur</option>
-                                       <option>Biratnagar</option>
-                                       <option>Pokhara</option>
+                                    <select class="form-select radius" name="radius">
+                                       <option disabled>College in radius of </option>
+                                       <option value="5">5 KM radius</option>
+                                       <option value="10" selected>10 KM radius</option>
+                                       <option value="25">25 KM Radius</option>
+                                       <option value="10000">All Over Nepal</option>
                                     </select>
                                  </div>
                               </div>
@@ -183,41 +183,62 @@
    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <script>
-    console.log("nearest college running")
-    // Retrieve the location from localStorage
-var locationData = JSON.parse(localStorage.getItem('location'));
+loadColleges();
 
-// Send an AJAX request to the API endpoint
-if (locationData) {
-  var url = "{{url('nearest-college')}}"; // Replace with the actual API endpoint URL
+function loadColleges()
+{
+        // Retrieve the location from localStorage
+    var locationData = JSON.parse(localStorage.getItem('location'));
 
-  $.ajax({
-    url: url,
-    type: 'GET',
-    data: {latitude: locationData[0], longitude: locationData[1]},
-    contentType: 'application/json',
-    success: function(response) {
-      // Process the response from the API
-      console.log('API Response:', response);
+    // Send an AJAX request to the API endpoint
+    if (locationData) {
+    var url = "{{url('nearest-college')}}"; // Replace with the actual API endpoint URL
+    let collegeName = $('.collegeName').val() ?? '';
+    var radiusVal = $('.radius').val() ?? 10;
 
-      // Render the page with the nearest college result
-      renderNearestCollege(response);
-    },
-    error: function(xhr, status, error) {
-      console.error('API Request Failed:', error);
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: {latitude: locationData[0], longitude: locationData[1], name: collegeName, radius: radiusVal},
+        contentType: 'application/json',
+        success: function(response) {
+        // Process the response from the API
+        console.log('API Response:', response);
+
+        // Render the page with the nearest college result
+        renderNearestCollege(response);
+        },
+        error: function(xhr, status, error) {
+        console.error('API Request Failed:', error);
+        }
+    });
+    } else {
+    console.log('Location data not found in localStorage.');
     }
-  });
-} else {
-  console.log('Location data not found in localStorage.');
 }
+
 
 function renderNearestCollege(result) {
+    $('.colleges').empty()
     $('.colleges').html(result)
-  // Implement your rendering logic here
-  // You can access the nearest college details from the 'result' object
-  // Update the HTML elements with the relevant information
 }
+
+
+$(document).on('keyup', '.collegeName', function() {
+    var inputVal = $(this).val();
+    if (inputVal.length >= 3) {
+        // Perform your action here
+        loadColleges();
+    }
+});
+
+$(document).on('change', '.radius', function() {
+    loadColleges();
+});
+
 
 </script>
 
