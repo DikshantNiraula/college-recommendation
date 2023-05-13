@@ -70,17 +70,15 @@
                       <a href="{{url('/courses')}}">Courses</i></a>
                    </li>
                    <li class="login-link">
-                      <a href="login.html.htm">Login / Signup</a>
+                      <a href="{{url('/login')}}">Login</a>
                    </li>
                 </ul>
              </div>
              <ul class="nav header-navbar-rht">
                 <li class="nav-item">
-                   <a class="login-head button" href="login.html.htm">Login</a>
+                   <a class="login-head button" href="{{url('/login')}}">Login</a>
                 </li>
-                <li class="nav-item">
-                   <a class="signin-head" href="register.html.htm">Sign up</a>
-                </li>
+              
              </ul>
           </div>
        </nav>

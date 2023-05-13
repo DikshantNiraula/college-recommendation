@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin Portal | Star Health Care</title>
+    <title>Admin Portal | VRIT SIKSHA</title>
     <!--== META TAGS ==-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

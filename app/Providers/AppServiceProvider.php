@@ -28,15 +28,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
           // Share data for first setting
-          $setting = Setting::first();
-          View::share('setting', $setting);
+        //   $setting = Setting::first();
+        //   View::share('setting', $setting);
   
-          // Share data for 3 latest blogs
-          $blogs = Blog::latest()->take(3)->get();
-          View::share('blogs', $blogs);
+        //   // Share data for 3 latest blogs
+        //   $blogs = Blog::latest()->take(3)->get();
+        //   View::share('blogs', $blogs);
   
-          // Share data for first about us
-          $aboutUs = AboutUs::first();
-          View::share('aboutUs', $aboutUs);
+        //   // Share data for first about us
+        //   $aboutUs = AboutUs::first();
+        //   View::share('aboutUs', $aboutUs);
     }
 }
