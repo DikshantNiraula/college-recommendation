@@ -43,14 +43,14 @@
                 <span></span>
                 </span>
                 </a>
-                <a href="index.html.htm" class="navbar-brand logo">
-                <img src="assets/img/logo.svg" class="img-fluid" alt="VRIT SIKHSHYA">
+                <a href="{{url('/')}}" class="navbar-brand logo">
+                {{-- <img src="assets/img/logo.svg" class="img-fluid" alt="VRIT SIKHSHYA"> --}}
                 </a>
              </div>
              <div class="main-menu-wrapper">
                 <div class="menu-header">
-                   <a href="index.html.htm" class="menu-logo">
-                   <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+                   <a href="{{url('/')}}" class="menu-logo">
+                   {{-- <img src="assets/img/logo.svg" class="img-fluid" alt="Logo"> --}}
                    </a>
                    <a id="menu_close" class="menu-close" href="javascript:void(0);">
                    <i class="fas fa-times"></i>
@@ -96,7 +96,7 @@
     
     <div class="footer-widget footer-about">
     <div class="footer-logo">
-    <img src="assets/img/logo.svg" alt="logo">
+    {{-- <img src="assets/img/logo.svg" alt="logo"> --}}
     </div>
     <div class="footer-about-content">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat mauris Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat mauris</p>
