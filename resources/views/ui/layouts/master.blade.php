@@ -44,12 +44,14 @@
                 </span>
                 </a>
                 <a href="{{url('/')}}" class="navbar-brand logo">
+                  VRIT SHIKSHYA
                 {{-- <img src="assets/img/logo.svg" class="img-fluid" alt="VRIT SIKHSHYA"> --}}
                 </a>
              </div>
              <div class="main-menu-wrapper">
                 <div class="menu-header">
                    <a href="{{url('/')}}" class="menu-logo">
+                    VRIT SHIKSHYA
                    {{-- <img src="assets/img/logo.svg" class="img-fluid" alt="Logo"> --}}
                    </a>
                    <a id="menu_close" class="menu-close" href="javascript:void(0);">
