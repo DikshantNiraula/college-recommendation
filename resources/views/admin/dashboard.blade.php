@@ -23,7 +23,7 @@
                         <span class="ad-hom-col-com ad-hom-col-1"><i class="fa fa-file"></i></span>
                         <div class="ad-hom-view-com">
                         <p><i class="fa  fa-arrow-up up"></i> Total Colleges</p>
-                        <h3>{{/App/Models/College::count()}}</h3>
+                        <h3>{{\App\Models\College::count()}}</h3>
                         </div>
                     </div>
                 </li>
@@ -32,7 +32,7 @@
                         <span class="ad-hom-col-com ad-hom-col-2"><i class="fa fa-question"></i></span>
                         <div class="ad-hom-view-com">
                         <p><i class="fa fa-arrow-up up"></i> Courses FAQ</p>
-                        <h3>{{/App/Models/CollegeCourse::count()}}</h3>
+                        <h3>{{\App\Models\CollegeCourse::count()}}</h3>
                         </div>
                     </div>
                 </li>
