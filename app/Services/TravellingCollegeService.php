@@ -89,6 +89,78 @@ class TravellingCollegeService
         ];
     }
     
+    function permuteRoute($startLatitude, $startLongitude, $collegeIds)
+    {
+        $colleges = College::whereIn('id', $collegeIds)->get();
+        $numColleges = count($colleges);
+    
+        // Generate all possible permutations of college indices
+        $permutations = $this->generatePermutations(range(0, $numColleges - 1));
+    
+        // Initialize variables to track the best route and distance
+        $bestDistance = PHP_FLOAT_MAX;
+        $bestRoute = [];
+    
+        // Iterate through each permutation
+        foreach ($permutations as $permutation) {
+            $distance = 0;
+            $route = [];
+    
+            // Calculate the distance from the starting location to the first college
+            $distance += $this->calculateDistance(
+                $startLatitude,
+                $startLongitude,
+                $colleges[$permutation[0]]->latitude,
+                $colleges[$permutation[0]]->longitude
+            );
+    
+            // Calculate the distance between each pair of colleges in the permutation
+            for ($i = 0; $i < $numColleges - 1; $i++) {
+                $source = $colleges[$permutation[$i]];
+                $destination = $colleges[$permutation[$i + 1]];
+                $distance += $this->calculateDistance(
+                    $source->latitude,
+                    $source->longitude,
+                    $destination->latitude,
+                    $destination->longitude
+                );
+            }
+    
+            // Update the best route and distance if the current permutation yields a shorter distance
+            if ($distance < $bestDistance) {
+                $bestDistance = $distance;
+                $bestRoute = array_map(function ($index) use ($colleges) {
+                    return $colleges[$index];
+                }, $permutation);
+            }
+        }
+    
+        return [
+            'route' => $bestRoute,
+            'total_distance' => $bestDistance,
+        ];
+
+    }
+
+
+    function generatePermutations($items, $perms = [], &$result = [])
+    {
+        if (empty($items)) {
+            $result[] = $perms;
+        } else {
+            for ($i = count($items) - 1; $i >= 0; --$i) {
+                $newItems = $items;
+                $newPerms = $perms;
+                list($foo) = array_splice($newItems, $i, 1);
+                array_unshift($newPerms, $foo);
+                $this->generatePermutations($newItems, $newPerms, $result);
+            }
+        }
+
+        return $result;
+    }
+    
+
     
     
     

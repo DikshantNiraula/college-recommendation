@@ -66,8 +66,11 @@
                       <a href="{{url('/colleges')}}">Colleges </a>
                    </li>
                    <li class="has-submenu menu-effect">
-                    <a href="{{url('/travel-colleges')}}">Travel Colleges </a>
+                    <a href="{{url('/travel-colleges')}}">Consecutive Visit </a>
                  </li>
+                 <li class="has-submenu menu-effect">
+                  <a href="{{url('/permute-colleges')}}">Best Path Visit </a>
+               </li>
                    <li class="has-submenu menu-effect">
                       <a href="{{url('/courses')}}">Courses</i></a>
                    </li>

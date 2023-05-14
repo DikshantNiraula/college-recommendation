@@ -52,6 +52,10 @@ Route::get('/travel-colleges',[UiController::class,'travelCollege']);
 
 Route::get('/shortest-path',[UiController::class,'getPaths']);
 
+Route::get('/permute-colleges',[UiController::class,'permuteCollege']);
+Route::get('/append-permute',[UiController::class,'appendPermute']);
+
+
 
 Route::get('/courses', [UiController::class, 'courses'])->name('courses');
 Route::get('/course/{slug}', [UiController::class, 'courseDetail'])->name('course');

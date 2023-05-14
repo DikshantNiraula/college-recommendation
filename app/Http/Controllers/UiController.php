@@ -134,11 +134,27 @@ class UiController extends Controller
         return view('ui.travel-college', compact('colleges','courses'));
     }
 
+    public function permuteCollege()
+    {
+        $colleges = College::latest()->get();
+        $courses = CollegeCourse::orderBy('title','asc')->limit(10)->get();
+        return view('ui.permute-travel', compact('colleges','courses'));
+    }
+
     public function getPaths(Request $request)
     {
         $collegeIds = $request->input('collegeIds');
         $result = (new TravellingCollegeService())->findOptimalRoute( $request->latitude, $request->longitude,$collegeIds);
-        
+
         return view('ui.append-travel-college',compact('result'))->render();
+    }
+
+
+    public function appendPermute(Request $request)
+    {
+        $collegeIds = $request->input('collegeIds');
+        $result = (new TravellingCollegeService())->permuteRoute( $request->latitude, $request->longitude,$collegeIds);
+        // return $result;
+        return view('ui.append-permute-travel',compact('result'))->render();
     }
 }
