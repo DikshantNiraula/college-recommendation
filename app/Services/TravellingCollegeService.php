@@ -27,7 +27,6 @@ class TravellingCollegeService
         return $distance;
     }
 
-
     function findOptimalRoute($startLatitude, $startLongitude, $collegeIds)
     {
         $colleges = College::whereIn('id', $collegeIds)->get();
@@ -39,6 +38,7 @@ class TravellingCollegeService
         $route = [];
         $collegeDetails = [];
         $totalDistance = 0;
+        $distances = [];
     
         while (count($visited) < count($collegeIds)) {
             $minDistance = PHP_FLOAT_MAX;
@@ -59,6 +59,22 @@ class TravellingCollegeService
             $route[] = $nearestCollegeId;
             $collegeDetails[] = $colleges->find($nearestCollegeId);
     
+            if (count($visited) === 1) {
+                // Calculate distance between user and first college
+                $distances[] = $minDistance;
+            } else {
+                // Calculate distance between consecutive colleges
+                $previousCollegeId = $route[count($route) - 2];
+                $previousCollege = $colleges->find($previousCollegeId);
+                $distance = $this->calculateDistance(
+                    $previousCollege->latitude,
+                    $previousCollege->longitude,
+                    $colleges->find($nearestCollegeId)->latitude,
+                    $colleges->find($nearestCollegeId)->longitude
+                );
+                $distances[] = $distance;
+            }
+    
             $totalDistance += $minDistance;
     
             $currentLatitude = $colleges->find($nearestCollegeId)->latitude;
@@ -69,8 +85,11 @@ class TravellingCollegeService
             'route' => $route,
             'collegeDetails' => $collegeDetails,
             'totalDistance' => $totalDistance,
+            'distances' => $distances,
         ];
     }
+    
+    
     
     
 }
