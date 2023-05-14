@@ -1,8 +1,10 @@
 <h2>Best Path [ {{ round($result['totalDistance'],3)}} KM]</h2>
 
 @foreach ($result['collegeDetails'] as $key => $college)
-   <h5 class="color: #0d6826;">Travelled Distance:{{ round($result['distances'][$key],3)  ?? 0}}KM</h5>
 
+               <center>
+                  <h5 class="color: #30890d; ">Travelled Distance:{{ round($result['distances'][$key],3)  ?? 0}}KM</h5>
+               </center>
                <div class="col-lg-12 d-flex">
                   <div class="instructor-list flex-fill">
                      <div class="instructor-img">
