@@ -140,14 +140,7 @@ class UiController extends Controller
         $result = (new TravellingCollegeService())->findOptimalRoute( $request->latitude, $request->longitude,$collegeIds);
         
 
-        return $result;
-        // return view('ui.append-travel-college',[
-        //     'bestPath' => $bestPath,
-        //     'worstPath' => $worstPath,
-        //     'colleges' => $colleges
-        //     // 'worstColleges' => $result['worstColleges'],
-        //     // 'worstDistance' => $result['worstDistance']
-        // ])->render();
+        return view('ui.append-travel-college',compact('result'))->render();
 
 
     }

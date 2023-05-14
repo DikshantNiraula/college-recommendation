@@ -31,42 +31,46 @@ class TravellingCollegeService
     function findOptimalRoute($startLatitude, $startLongitude, $collegeIds)
     {
         $colleges = College::whereIn('id', $collegeIds)->get();
-
+    
         $currentLatitude = $startLatitude;
         $currentLongitude = $startLongitude;
-
+    
         $visited = [];
         $route = [];
         $collegeDetails = [];
-
+        $totalDistance = 0;
+    
         while (count($visited) < count($collegeIds)) {
             $minDistance = PHP_FLOAT_MAX;
             $nearestCollegeId = null;
-
+    
             foreach ($colleges as $college) {
                 if (!in_array($college->id, $visited)) {
                     $distance = $this->calculateDistance($currentLatitude, $currentLongitude, $college->latitude, $college->longitude);
-
+    
                     if ($distance < $minDistance) {
                         $minDistance = $distance;
                         $nearestCollegeId = $college->id;
                     }
                 }
             }
-
+    
             $visited[] = $nearestCollegeId;
             $route[] = $nearestCollegeId;
             $collegeDetails[] = $colleges->find($nearestCollegeId);
-
+    
+            $totalDistance += $minDistance;
+    
             $currentLatitude = $colleges->find($nearestCollegeId)->latitude;
             $currentLongitude = $colleges->find($nearestCollegeId)->longitude;
         }
-
+    
         return [
             'route' => $route,
             'collegeDetails' => $collegeDetails,
+            'totalDistance' => $totalDistance,
         ];
     }
-
+    
     
 }
