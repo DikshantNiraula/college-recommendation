@@ -137,8 +137,7 @@ class UiController extends Controller
     public function getPaths(Request $request)
     {
         $collegeIds = $request->input('collegeIds');
-        $result = (new TravellingCollegeService())->findBestRoute($collegeIds, $request->latitude, $request->longitude);
-        
+        $result = (new TravellingCollegeService())->findOptimalRoute( $request->latitude, $request->longitude,$collegeIds);
         
 
         return $result;
